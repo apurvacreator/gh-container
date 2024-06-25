@@ -11,16 +11,16 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:16
+    # container:
+    #   image: node:16
     env:
       # MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       # MONGODB_CLUSTER_ADDRESS: cluster0.uzaichl.mongodb.net
       MONGODB_CONNECTION_PROTOCOL: mongodb
       # When a container image is used, there is a nerwork connection created between the service container and job container
-      MONGODB_CLUSTER_ADDRESS: mongodb
+      # MONGODB_CLUSTER_ADDRESS: mongodb
       # Without a container, mongodb opened port by service container
-      # MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
       # MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
       # MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       MONGODB_USERNAME: root
@@ -29,8 +29,8 @@ jobs:
     services:
       mongodb:
         image: mongo
-        # ports:
-        #   - 27017:27017
+        ports:
+          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
